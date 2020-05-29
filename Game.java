@@ -1,7 +1,3 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
 package rps;
 
 import java.util.List;
@@ -12,6 +8,7 @@ import java.util.ArrayList;
 
 public class Game
 {
+    // INSTANCE VARIABLES
     static String[] options;
     static String[] choices;
     static String[] restart;
@@ -28,6 +25,7 @@ public class Game
     static int totalWinsP2;
     static boolean keepPlaying;
     
+    // This is just a way to have all the variables inside be static.
     static {
         Game.options = new String[] { "Player vs Player", "Player vs Computer", "Exit" };
         Game.choices = new String[] { "Rock", "Paper", "Scissors", "HighScore", "Exit" };
@@ -39,13 +37,21 @@ public class Game
         Game.keepPlaying = true;
     }
     
+    // MAIN METHOD
+    /*
+     * Due to the simplicity of Rock Paper Scissors, the game is mostly done in a main method, beginning
+     * with dialogue that asks the user whether they want to play versus a player or a computer. Once their
+     * choice is selected, the game begins. Buttons allow the user to select rock, paper, scissors, see their
+     * high scores, or quit the game. The text box updates whenever a player wins, adding to their wins and keeping
+     * a tally of the streak of wins the user is on. 
+     */
     public static void main(final String[] args) {
         Game.loss = 0;
         Game.win = 0;
         Game.totalWins = 0;
         final int x = Window.option(Game.options, "Welcome to Rock Paper Scissors! \n What mode do you want to play?");
         if (x == 0) {
-            JOptionPane.showMessageDialog(null, "You've chosen to play player vs player, /n make sure your friend is nearby so you can start!");
+            JOptionPane.showMessageDialog(null, "You've chosen to play player vs player, \n make sure your friend is nearby so you can start!");
             while (Game.continueGame) {
                 while (Game.keepPlaying) {
                     final int a = Window.option(Game.choices, "Player one's choice\nCurrent Scores: P1: " + Game.win + " P2: " + Game.loss + "\nPlayer One's score: " + Game.totalWins + " Player Two's score: " + Game.totalWinsP2);
@@ -285,6 +291,9 @@ public class Game
         }
     }
     
+    /*
+     * This method updates the list of wins for player one, also adding to the list of high scores.
+     */
     public static void updateList(final int number) {
         if (number > 0) {
             Game.highScore.add(number);
@@ -293,6 +302,9 @@ public class Game
         }
     }
     
+    /*
+     * This method updates the list of wins for player two, also adding to the list of high scores.
+     */
     public static void updateListP2(final int number) {
         if (number > 0) {
             Game.highScoreP2.add(number);
